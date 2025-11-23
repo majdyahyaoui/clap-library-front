@@ -1,0 +1,45 @@
+<div class="book-list">
+  <div class="list-header">
+    <h2>Books</h2>
+    <a routerLink="/books/new" class="btn btn-primary">➕ Add New Book</a>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading books...
+  </div>
+
+  <div *ngIf="!loading && books.length === 0" class="alert alert-warning">
+    No books found. <a routerLink="/books/new">Create one</a>
+  </div>
+
+  <table *ngIf="!loading && books.length > 0" class="books-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Year</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>
+          <strong>{{ book.title }}</strong>
+        </td>
+        <td>{{ book.author.firstName }} {{ book.author.lastName }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.publicationYear }}</td>
+        <td class="actions">
+          <a [routerLink]="['/books', book.id]" class="action-link">View</a>
+          <a [routerLink]="['/books', book.id, 'edit']" class="action-link">Edit</a>
+          <button (click)="deleteBook(book.id!, book.title)" class="action-link delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

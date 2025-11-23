@@ -1,0 +1,41 @@
+<div class="author-list">
+  <div class="list-header">
+    <h2>Authors</h2>
+    <a routerLink="/authors/new" class="btn btn-primary">➕ Add New Author</a>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading authors...
+  </div>
+
+  <div *ngIf="!loading && authors.length === 0" class="alert alert-warning">
+    No authors found. <a routerLink="/authors/new">Create one</a>
+  </div>
+
+  <table *ngIf="!loading && authors.length > 0" class="authors-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authors">
+        <td>
+          <strong>{{ author.firstName }} {{ author.lastName }}</strong>
+        </td>
+        <td>{{ author.email }}</td>
+        <td class="actions">
+          <a [routerLink]="['/authors', author.id]" class="action-link">View</a>
+          <a [routerLink]="['/authors', author.id, 'edit']" class="action-link">Edit</a>
+          <button (click)="deleteAuthor(author.id!, author.firstName, author.lastName)" class="action-link delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

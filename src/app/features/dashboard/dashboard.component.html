@@ -1,0 +1,44 @@
+<div class="dashboard">
+  <h2>Dashboard</h2>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading statistics...
+  </div>
+
+  <div *ngIf="!loading" class="stats-container">
+    <div class="stat-card">
+      <div class="stat-number">{{ authorsCount }}</div>
+      <div class="stat-label">Authors</div>
+      <a routerLink="/authors" class="stat-link">View Authors →</a>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number">{{ booksCount }}</div>
+      <div class="stat-label">Books</div>
+      <a routerLink="/books" class="stat-link">View Books →</a>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-buttons">
+      <a routerLink="/authors/new" class="btn btn-primary">➕ Add Author</a>
+      <a routerLink="/books/new" class="btn btn-primary">➕ Add Book</a>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>Welcome to CLAP Library Management</h3>
+    <p>This application allows you to manage a library system with authors and books.</p>
+    <ul>
+      <li>Create, read, update, and delete authors</li>
+      <li>Create, read, update, and delete books</li>
+      <li>Search and filter books by title or author</li>
+      <li>Manage book-author relationships</li>
+    </ul>
+  </div>
+</div>
