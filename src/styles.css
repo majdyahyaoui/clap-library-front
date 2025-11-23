@@ -1,0 +1,311 @@
+/* Global Styles */
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --danger-color: #e74c3c;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --light-bg: #ecf0f1;
+  --dark-text: #2c3e50;
+  --border-color: #bdc3c7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  line-height: 1.6;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Buttons */
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #229954;
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 0.4rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Lists */
+ul {
+  margin-left: 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+thead {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+  background-color: var(--light-bg);
+}
+
+/* Alerts */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.4rem;
+  border-left: 4px solid;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: var(--success-color);
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: var(--danger-color);
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: var(--warning-color);
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: var(--primary-color);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Spacing */
+.mt-1 {
+  margin-top: 0.5rem;
+}
+.mt-2 {
+  margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
+}
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+.mb-2 {
+  margin-bottom: 1rem;
+}
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+.p-2 {
+  padding: 1rem;
+}
+.p-3 {
+  padding: 1.5rem;
+}
+.p-4 {
+  padding: 2rem;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+.text-muted {
+  color: #95a5a6;
+}
+.text-danger {
+  color: var(--danger-color);
+}
+.text-success {
+  color: var(--success-color);
+}
+
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gap-1 {
+  gap: 0.5rem;
+}
+.gap-2 {
+  gap: 1rem;
+}
+.gap-3 {
+  gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.75rem 0.5rem;
+  }
+}

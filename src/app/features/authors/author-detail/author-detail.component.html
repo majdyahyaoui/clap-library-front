@@ -1,0 +1,41 @@
+<div class="author-detail">
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading author details...
+  </div>
+
+  <div *ngIf="!loading && author" class="detail-content">
+    <div class="detail-header">
+      <div>
+        <h2>{{ author.firstName }} {{ author.lastName }}</h2>
+        <p class="email">{{ author.email }}</p>
+      </div>
+      <div class="detail-actions">
+        <a [routerLink]="['/authors', author.id, 'edit']" class="btn btn-primary">✎ Edit</a>
+        <button (click)="deleteAuthor()" class="btn btn-danger">🗑 Delete</button>
+      </div>
+    </div>
+
+    <div class="books-section">
+      <h3>Published Books ({{ books.length }})</h3>
+      <div *ngIf="books.length === 0" class="empty-state">
+        <p>No books published by this author yet.</p>
+      </div>
+      <div *ngIf="books.length > 0" class="books-grid">
+        <div *ngFor="let book of books" class="book-card">
+          <h4>{{ book.title }}</h4>
+          <p class="isbn">ISBN: {{ book.isbn }}</p>
+          <p class="year">Published: {{ book.publicationYear }}</p>
+          <a [routerLink]="['/books', book.id]" class="card-link">View Details →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a routerLink="/authors" class="btn btn-secondary">← Back to Authors</a>
+    </div>
+  </div>
+</div>

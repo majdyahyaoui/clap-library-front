@@ -1,0 +1,41 @@
+<div class="book-detail">
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">
+    Loading book details...
+  </div>
+
+  <div *ngIf="!loading && book" class="detail-content">
+    <div class="detail-header">
+      <div>
+        <h2>{{ book.title }}</h2>
+        <p class="author">
+          By <a [routerLink]="['/authors', book.author.id]">
+            {{ book.author.firstName }} {{ book.author.lastName }}
+          </a>
+        </p>
+      </div>
+      <div class="detail-actions">
+        <a [routerLink]="['/books', book.id, 'edit']" class="btn btn-primary">✎ Edit</a>
+        <button (click)="deleteBook()" class="btn btn-danger">🗑 Delete</button>
+      </div>
+    </div>
+
+    <div class="book-info">
+      <div class="info-item">
+        <span class="label">ISBN:</span>
+        <span class="value">{{ book.isbn }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Publication Year:</span>
+        <span class="value">{{ book.publicationYear }}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a routerLink="/books" class="btn btn-secondary">← Back to Books</a>
+    </div>
+  </div>
+</div>
