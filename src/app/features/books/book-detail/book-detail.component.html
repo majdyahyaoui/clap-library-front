@@ -1,41 +1,51 @@
-<div class="book-detail">
-  <div *ngIf="error" class="alert alert-danger">
+<div class="container">
+  <div *ngIf="error" style="color: #d32f2f; padding: 16px; background: #ffebee; border-radius: 4px; margin-bottom: 16px;">
     {{ error }}
   </div>
 
-  <div *ngIf="loading" class="alert alert-info">
-    Loading book details...
+  <div *ngIf="loading" style="display: flex; justify-content: center; padding: 40px;">
+    <mat-spinner></mat-spinner>
   </div>
 
-  <div *ngIf="!loading && book" class="detail-content">
-    <div class="detail-header">
-      <div>
-        <h2>{{ book.title }}</h2>
-        <p class="author">
-          By <a [routerLink]="['/authors', book.author.id]">
-            {{ book.author.firstName }} {{ book.author.lastName }}
-          </a>
-        </p>
-      </div>
-      <div class="detail-actions">
-        <a [routerLink]="['/books', book.id, 'edit']" class="btn btn-primary">✎ Edit</a>
-        <button (click)="deleteBook()" class="btn btn-danger">🗑 Delete</button>
-      </div>
-    </div>
+  <mat-card *ngIf="!loading && book">
+    <mat-card-header>
+      <mat-card-title>
+        <div style="display: flex; justify-content: space-between; align-items: start; width: 100%;">
+          <div>
+            <h2 style="margin: 0;">{{ book.title }}</h2>
+            <p style="margin: 8px 0 0 0; color: #666;" *ngIf="book.authorFirstName && book.authorLastName">
+              By <a [routerLink]="['/authors', book.authorId]" style="color: #3f51b5; text-decoration: none;">
+                {{ book.authorFirstName }} {{ book.authorLastName }}
+              </a>
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a [routerLink]="['/books', book.id, 'edit']" mat-raised-button color="primary">
+              <mat-icon>edit</mat-icon> Edit
+            </a>
+            <button (click)="deleteBook()" mat-raised-button color="warn">
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </div>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
 
-    <div class="book-info">
-      <div class="info-item">
-        <span class="label">ISBN:</span>
-        <span class="value">{{ book.isbn }}</span>
+    <mat-card-content style="margin-top: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <strong>Price:</strong> {{ book.price | currency:'EUR' }}
+        </div>
+        <div>
+          <strong>Publication Date:</strong> {{ book.publicationDate | date:'dd/MM/yyyy' }}
+        </div>
       </div>
-      <div class="info-item">
-        <span class="label">Publication Year:</span>
-        <span class="value">{{ book.publicationYear }}</span>
-      </div>
-    </div>
+    </mat-card-content>
 
-    <div class="actions">
-      <a routerLink="/books" class="btn btn-secondary">← Back to Books</a>
-    </div>
-  </div>
+    <mat-card-actions>
+      <a routerLink="/books" mat-button>
+        <mat-icon>arrow_back</mat-icon> Back to Books
+      </a>
+    </mat-card-actions>
+  </mat-card>
 </div>

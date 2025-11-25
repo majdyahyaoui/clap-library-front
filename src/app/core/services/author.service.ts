@@ -5,9 +5,8 @@ import { environment } from '../../../environments/environment';
 
 export interface Author {
   id?: number;
-  firstName: string;
   lastName: string;
-  email: string;
+  firstName: string;
 }
 
 @Injectable({

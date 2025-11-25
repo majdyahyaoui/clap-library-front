@@ -1,56 +1,42 @@
-<div class="author-form">
-  <h2>{{ isEditing ? 'Edit Author' : 'Create New Author' }}</h2>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{ isEditing ? 'Edit Author' : 'Create New Author' }}</h2>
+      </mat-card-title>
+    </mat-card-header>
 
-  <div *ngIf="error" class="alert alert-danger">
-    {{ error }}
-  </div>
+    <mat-card-content>
+      <div *ngIf="error" style="color: #d32f2f; padding: 16px; background: #ffebee; border-radius: 4px; margin-bottom: 16px;">
+        {{ error }}
+      </div>
 
-  <div *ngIf="success" class="alert alert-success">
-    {{ success }}
-  </div>
+      <div *ngIf="success" style="color: #2e7d32; padding: 16px; background: #e8f5e9; border-radius: 4px; margin-bottom: 16px;">
+        {{ success }}
+      </div>
 
-  <form (ngSubmit)="onSubmit()" class="form-container">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input
-        type="text"
-        id="firstName"
-        [(ngModel)]="author.firstName"
-        name="firstName"
-        placeholder="Enter first name"
-        [disabled]="loading"
-      />
-    </div>
+      <div *ngIf="loading" style="display: flex; justify-content: center; padding: 40px;">
+        <mat-spinner></mat-spinner>
+      </div>
 
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input
-        type="text"
-        id="lastName"
-        [(ngModel)]="author.lastName"
-        name="lastName"
-        placeholder="Enter last name"
-        [disabled]="loading"
-      />
-    </div>
+      <form (ngSubmit)="onSubmit()" *ngIf="!loading" style="display: flex; flex-direction: column; gap: 16px;">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="author.firstName" name="firstName" placeholder="Enter first name" required>
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        [(ngModel)]="author.email"
-        name="email"
-        placeholder="Enter email address"
-        [disabled]="loading"
-      />
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="author.lastName" name="lastName" placeholder="Enter last name" required>
+        </mat-form-field>
 
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary" [disabled]="loading">
-        {{ loading ? 'Saving...' : (isEditing ? 'Update Author' : 'Create Author') }}
-      </button>
-      <a routerLink="/authors" class="btn btn-secondary">Cancel</a>
-    </div>
-  </form>
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button mat-raised-button color="primary" type="submit">
+            {{ isEditing ? 'Update Author' : 'Create Author' }}
+          </button>
+          <a routerLink="/authors" mat-raised-button>Cancel</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

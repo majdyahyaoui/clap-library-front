@@ -1,41 +1,64 @@
-<div class="author-detail">
-  <div *ngIf="error" class="alert alert-danger">
+<div class="container">
+  <div *ngIf="error" style="color: #d32f2f; padding: 16px; background: #ffebee; border-radius: 4px; margin-bottom: 16px;">
     {{ error }}
   </div>
 
-  <div *ngIf="loading" class="alert alert-info">
-    Loading author details...
+  <div *ngIf="loading" style="display: flex; justify-content: center; padding: 40px;">
+    <mat-spinner></mat-spinner>
   </div>
 
-  <div *ngIf="!loading && author" class="detail-content">
-    <div class="detail-header">
-      <div>
-        <h2>{{ author.firstName }} {{ author.lastName }}</h2>
-        <p class="email">{{ author.email }}</p>
-      </div>
-      <div class="detail-actions">
-        <a [routerLink]="['/authors', author.id, 'edit']" class="btn btn-primary">✎ Edit</a>
-        <button (click)="deleteAuthor()" class="btn btn-danger">🗑 Delete</button>
-      </div>
-    </div>
+  <div *ngIf="!loading && author">
+    <mat-card style="margin-bottom: 24px;">
+      <mat-card-header>
+        <mat-card-title>
+          <div style="display: flex; justify-content: space-between; align-items: start; width: 100%;">
+            <div>
+              <h2 style="margin: 0;">{{ author.firstName }} {{ author.lastName }}</h2>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <a [routerLink]="['/authors', author.id, 'edit']" mat-raised-button color="primary">
+                <mat-icon>edit</mat-icon> Edit
+              </a>
+              <button (click)="deleteAuthor()" mat-raised-button color="warn">
+                <mat-icon>delete</mat-icon> Delete
+              </button>
+            </div>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
 
-    <div class="books-section">
-      <h3>Published Books ({{ books.length }})</h3>
-      <div *ngIf="books.length === 0" class="empty-state">
-        <p>No books published by this author yet.</p>
-      </div>
-      <div *ngIf="books.length > 0" class="books-grid">
-        <div *ngFor="let book of books" class="book-card">
-          <h4>{{ book.title }}</h4>
-          <p class="isbn">ISBN: {{ book.isbn }}</p>
-          <p class="year">Published: {{ book.publicationYear }}</p>
-          <a [routerLink]="['/books', book.id]" class="card-link">View Details →</a>
+      <mat-card-actions>
+        <a routerLink="/authors" mat-button>
+          <mat-icon>arrow_back</mat-icon> Back to Authors
+        </a>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Published Books ({{ books.length }})</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div *ngIf="books.length === 0" style="text-align: center; padding: 40px; color: #666;">
+          No books published by this author yet.
         </div>
-      </div>
-    </div>
 
-    <div class="actions">
-      <a routerLink="/authors" class="btn btn-secondary">← Back to Authors</a>
-    </div>
+        <div *ngIf="books.length > 0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;">
+          <mat-card *ngFor="let book of books" style="cursor: pointer;" [routerLink]="['/books', book.id]">
+            <mat-card-header>
+              <mat-card-title style="font-size: 1.1rem;">{{ book.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p style="margin: 0; color: #666; font-size: 0.9rem;">Price: {{ book.price | currency:'EUR' }}</p>
+              <p style="margin: 4px 0 0 0; color: #666; font-size: 0.9rem;">Published: {{ book.publicationDate | date:'dd/MM/yyyy' }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a [routerLink]="['/books', book.id]" mat-button color="primary">View Details</a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
