@@ -2,12 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthorService, Author } from '../../../core/services/author.service';
 
 @Component({
   selector: 'app-author-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './author-form.component.html',
   styleUrls: ['./author-form.component.css'],
 })
@@ -15,7 +29,6 @@ export class AuthorFormComponent implements OnInit {
   author: Author = {
     firstName: '',
     lastName: '',
-    email: '',
   };
   isEditing = false;
   loading = false;
@@ -84,14 +97,6 @@ export class AuthorFormComponent implements OnInit {
     }
     if (!this.author.lastName.trim()) {
       this.error = 'Last name is required';
-      return false;
-    }
-    if (!this.author.email.trim()) {
-      this.error = 'Email is required';
-      return false;
-    }
-    if (!this.author.email.includes('@')) {
-      this.error = 'Invalid email format';
       return false;
     }
     return true;

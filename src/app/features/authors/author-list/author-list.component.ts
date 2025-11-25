@@ -1,17 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthorService, Author } from '../../../core/services/author.service';
 
 @Component({
   selector: 'app-author-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatTooltipModule,
+  ],
   templateUrl: './author-list.component.html',
   styleUrls: ['./author-list.component.css'],
 })
 export class AuthorListComponent implements OnInit {
   authors: Author[] = [];
+  displayedColumns: string[] = ['name', 'actions'];
   loading = true;
   error: string | null = null;
   searchQuery = '';

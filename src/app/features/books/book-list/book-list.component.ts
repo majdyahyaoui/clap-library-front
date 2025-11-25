@@ -1,17 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BookService, Book } from '../../../core/services/book.service';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatTooltipModule,
+  ],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+  displayedColumns: string[] = ['title', 'author', 'price', 'date', 'actions'];
   loading = true;
   error: string | null = null;
   searchQuery = '';

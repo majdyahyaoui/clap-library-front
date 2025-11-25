@@ -1,26 +1,23 @@
-<header class="navbar">
-  <div class="container">
-    <div class="navbar-brand">
-      <h1>📚 CLAP Library</h1>
-    </div>
-    <nav class="navbar-nav">
-      <ul>
-        <li><a routerLink="/">Dashboard</a></li>
-        <li><a routerLink="/authors">Authors</a></li>
-        <li><a routerLink="/books">Books</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<div style="min-height: 100vh; display: flex; flex-direction: column;">
+  <mat-toolbar color="primary">
+    <a routerLink="/" style="display: flex; align-items: center; text-decoration: none; color: inherit; cursor: pointer;">
+      <mat-icon style="margin-right: 8px;">menu_book</mat-icon>
+      <span>CLAP Library</span>
+    </a>
+    <span style="flex: 1;"></span>
+    <a routerLink="/authors" mat-button>
+      <mat-icon>person</mat-icon> Authors
+    </a>
+    <a routerLink="/books" mat-button>
+      <mat-icon>menu_book</mat-icon> Books
+    </a>
+  </mat-toolbar>
 
-<main class="main-content">
-  <div class="container">
+  <main style="padding: 24px 0; flex: 1;">
     <router-outlet></router-outlet>
-  </div>
-</main>
+  </main>
 
-<footer class="footer">
-  <div class="container">
-    <p>&copy; 2025 CLAP Library Management System. All rights reserved.</p>
-  </div>
-</footer>
+  <footer style="background: #f5f5f5; padding: 24px; text-align: center; color: #666;">
+    <p style="margin: 0;">&copy; 2025 CLAP Library Management System. All rights reserved.</p>
+  </footer>
+</div>

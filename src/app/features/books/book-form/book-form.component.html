@@ -1,71 +1,59 @@
-<div class="book-form">
-  <h2>{{ isEditing ? 'Edit Book' : 'Create New Book' }}</h2>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{ isEditing ? 'Edit Book' : 'Create New Book' }}</h2>
+      </mat-card-title>
+    </mat-card-header>
 
-  <div *ngIf="error" class="alert alert-danger">
-    {{ error }}
-  </div>
+    <mat-card-content>
+      <div *ngIf="error" style="color: #d32f2f; padding: 16px; background: #ffebee; border-radius: 4px; margin-bottom: 16px;">
+        {{ error }}
+      </div>
 
-  <div *ngIf="success" class="alert alert-success">
-    {{ success }}
-  </div>
+      <div *ngIf="success" style="color: #2e7d32; padding: 16px; background: #e8f5e9; border-radius: 4px; margin-bottom: 16px;">
+        {{ success }}
+      </div>
 
-  <form (ngSubmit)="onSubmit()" class="form-container">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input
-        type="text"
-        id="title"
-        [(ngModel)]="book.title"
-        name="title"
-        placeholder="Enter book title"
-        [disabled]="loading"
-      />
-    </div>
+      <div *ngIf="loading" style="display: flex; justify-content: center; padding: 40px;">
+        <mat-spinner></mat-spinner>
+      </div>
 
-    <div class="form-group">
-      <label for="isbn">ISBN</label>
-      <input
-        type="text"
-        id="isbn"
-        [(ngModel)]="book.isbn"
-        name="isbn"
-        placeholder="Enter ISBN"
-        [disabled]="loading"
-      />
-    </div>
+      <form (ngSubmit)="onSubmit()" *ngIf="!loading" style="display: flex; flex-direction: column; gap: 16px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="book.title" name="title" placeholder="Enter book title" required>
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="publicationYear">Publication Year</label>
-      <input
-        type="number"
-        id="publicationYear"
-        [(ngModel)]="book.publicationYear"
-        name="publicationYear"
-        placeholder="Enter publication year"
-        [disabled]="loading"
-      />
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Price (€)</mat-label>
+          <input matInput type="number" [(ngModel)]="book.price" name="price" placeholder="Enter price" step="0.01" min="0" required>
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="author">Author</label>
-      <select
-        id="author"
-        [(ngModel)]="selectedAuthorId"
-        name="author"
-        [disabled]="loading || loadingAuthors"
-      >
-        <option value="0" disabled>Select an author</option>
-        <option *ngFor="let author of authors" [value]="author.id">
-          {{ author.firstName }} {{ author.lastName }}
-        </option>
-      </select>
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Publication Date</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="publicationDateObj" name="publicationDate" placeholder="Select date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary" [disabled]="loading">
-        {{ loading ? 'Saving...' : (isEditing ? 'Update Book' : 'Create Book') }}
-      </button>
-      <a routerLink="/books" class="btn btn-secondary">Cancel</a>
-    </div>
-  </form>
+        <mat-form-field appearance="outline">
+          <mat-label>Author</mat-label>
+          <mat-select [(ngModel)]="selectedAuthorId" name="author" required [disabled]="loadingAuthors">
+            <mat-option value="0" disabled>Select an author</mat-option>
+            <mat-option *ngFor="let author of authors" [value]="author.id">
+              {{ author.firstName }} {{ author.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button mat-raised-button color="primary" type="submit">
+            {{ isEditing ? 'Update Book' : 'Create Book' }}
+          </button>
+          <a routerLink="/books" mat-raised-button>Cancel</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

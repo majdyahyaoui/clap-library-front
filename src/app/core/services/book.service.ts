@@ -6,13 +6,11 @@ import { environment } from '../../../environments/environment';
 export interface Book {
   id?: number;
   title: string;
-  isbn: string;
-  publicationYear: number;
-  author: {
-    id: number;
-    firstName: string;
-    lastName: string;
-  };
+  price: number;
+  publicationDate: string; // Format: YYYY-MM-DD
+  authorId: number;
+  authorLastName?: string;
+  authorFirstName?: string;
 }
 
 @Injectable({
